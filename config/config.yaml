@@ -1,0 +1,26 @@
+data:
+  input_path: [] #Here you path files
+  output_path: 'processed.parquet'
+
+clean_data: 
+  operation: 'drop_nulls'
+  col: 'age'
+
+window_data: 
+  operation: 'rolling_mean'
+  col: 'age'
+  window: 5
+  over: 'user_id'
+
+agg_data: 
+  operation: 'mean'
+  col: 'age'
+  group_by: 'user_id'
+
+join_data: 
+  join_on: 'user_id'
+  join_type: 'left'
+  post_filter: 
+    operations: ['age < 45']
+
+
