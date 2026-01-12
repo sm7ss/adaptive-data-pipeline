@@ -26,24 +26,6 @@ Un sistema de procesamiento de datos **auto-adaptativo** que selecciona intelige
 - **Manejo automático de errores** y recuperación
 - **Soporte múltiples formatos** (YAML/TOML)
 
-
-## 🏗️ Arquitectura del Sistema
-
-adaptive-data-pipeline/
-├── 📁 core/ # Núcleo del sistema
-│ ├── PipelineDataPreProcessing.py # Orquestador principal
-│ └── Frame.py # Gestor de frames adaptativo
-├── 📁 operations/ # Operaciones de procesamiento
-│ ├── RayOperations.py # Procesamiento distribuido
-│ └── PolarsOperations.py # Operaciones Polars
-├── 📁 validation/ # Validación y configuración
-│ ├── Validator.py # Validación de schemas
-│ └── ReadData.py # Lectura de configuraciones
-├── 📁 resources/ # Gestión de recursos
-│ └── Resources.py # Optimización de recursos Ray
-└── 📁 strategies/ # Estrategias y patrones
-└── Strategy.py # Enums y estrategias
-
 ## 🎯 Toma de Decisiones Inteligente
 
 ### **Algoritmo de Selección de Modo**
