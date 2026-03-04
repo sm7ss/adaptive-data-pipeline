@@ -84,7 +84,7 @@ class PolarsFrame:
     
     def get_frame(self, 
         frame: Union[pl.DataFrame, pl.LazyFrame], 
-        frame_2: Optional[Union[pl.DataFrame, pl.LazyFrame]]) -> Union[pl.DataFrame, pl.LazyFrame]: 
+        frame_2: Optional[Union[pl.DataFrame, pl.LazyFrame]] = None) -> Union[pl.DataFrame, pl.LazyFrame]: 
         df_transform = frame.with_columns(self.expr.list_expr())
         
         if isinstance(self.model.data, list): 
