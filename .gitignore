@@ -68,7 +68,6 @@ venv.bak/
 Thumbs.db
 
 # Data files
-*.csv
 *.parquet
 *.json
 *.pkl
@@ -80,3 +79,5 @@ logs/
 
 # Prefect
 .prefect/
+.ray
+.python-version
