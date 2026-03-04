@@ -126,36 +126,36 @@ class etl(BaseModel):
                         raise ValueError(f'El valor {valor} debe ser numerico')
             return self
         
-        if self.data.suffix == '.csv': 
+        if input_data.suffix == '.csv': 
             schema = pl.scan_csv(self.data.input_path).collect_schema()
         else: 
             schema= pl.scan_parquet(self.data.input_path).collect_schema()
         
         if self.clean_data is not None: 
             if self.clean_data.col not in schema: 
-                logger.error(f'La columna {self.clean_data.col} no existe en el Schema')
-                raise ValueError(f'La columna {self.clean_data.col} no existe en el Schema')
+                logger.error(f'La columna {self.clean_data.col} no existe en el Schema:\nSchema: {schema}')
+                raise ValueError(f'La columna {self.clean_data.col} no existe en el Schema:\nSchema: {schema}')
         
         if self.window_data is not None: 
             if self.window_data.col not in schema: 
-                logger.error(f'La columna {self.window_data.col} no existe en el Schema')
-                raise ValueError(f'La columna {self.window_data.col} no existe en el Schema')
+                logger.error(f'La columna {self.window_data.col} no existe en el Schema:\nSchema: {schema}')
+                raise ValueError(f'La columna {self.window_data.col} no existe en el Schema:\nSchema: {schema}')
             if not schema[self.window_data.col].is_numeric(): 
                 logger.error(f'La columna {self.window_data.col} debe ser una columna numerica')
                 raise ValueError(f'La columna {self.window_data.col} debe ser una columna numerica')
             if self.window_data.over not in schema: 
-                logger.error(f'La columna {self.window_data.over} no existe en el Schema')
-                raise ValueError(f'La columna {self.window_data.over} no existe en el Schema')
+                logger.error(f'La columna {self.window_data.over} no existe en el Schema:\nSchema: {schema}')
+                raise ValueError(f'La columna {self.window_data.over} no existe en el Schema:\nSchema: {schema}')
         
         if self.agg_data is not None: 
             if self.agg_data.col not in schema: 
-                logger.error(f'La columna {self.agg_data.col} no existe en el Schema')
-                raise ValueError(f'La columna {self.agg_data.col} no existe en el Schema')
+                logger.error(f'La columna {self.agg_data.col} no existe en el Schema:\nSchema: {schema}')
+                raise ValueError(f'La columna {self.agg_data.col} no existe en el Schema:\nSchema: {schema}')
             if not schema[self.agg_data.col].is_numeric(): 
                 logger.error(f'La columna {self.agg_data.col} debe ser una columna numerica')
                 raise ValueError(f'La columna {self.agg_data.col} debe ser una columna numerica')
             if self.agg_data.group_by not in schema: 
-                logger.error(f'La columna {self.agg_data.group_by} no existe en el Schema')
-                raise ValueError(f'La columna {self.agg_data.group_by} no existe en el Schema')
+                logger.error(f'La columna {self.agg_data.group_by} no existe en el Schema:\nSchema: {schema}')
+                raise ValueError(f'La columna {self.agg_data.group_by} no existe en el Schema:\nSchema: {schema}')
         
         return self
