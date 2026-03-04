@@ -7,56 +7,52 @@
 [![Architecture](https://img.shields.io/badge/Architecture-Adaptive-orange.svg)](#)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-Un sistema de procesamiento de datos **auto-adaptativo** que selecciona inteligentemente entre modos de ejecución (Eager/Lazy/Ray) basado en el tamaño de los datos y recursos disponibles, integrando Polars para máximo rendimiento y Pydantic para validación robusta.
+A **self-adaptive** data processing system that intelligently selects between execution modes (Eager/Lazy/Ray) based on data size and available resources, integrating Polars for maximum performance and Pydantic for robust validation.
 
-## 🌟 Características Principales
+## 🌟 Key features
 
-### 🧠 **Inteligencia Adaptativa**
-- **Selección automática** del modo de procesamiento óptimo
-- **Gestión inteligente de memoria** y recursos
-- **Decision-making en tiempo real** basado en métricas del sistema
+### 🧠 **Adaptive intelligence**
+- **Automatic selection** of the optimal processing mode
+- **Intelligent memory and resource management**
+- **Real-time decision making** based on system metrics
 
-### ⚡ **Multi-Modal Processing**
-- **Eager Mode**: Para datasets pequeños (Polars DataFrame)
-- **Lazy Mode**: Para datasets medianos (Polars LazyFrame)  
-- **Distributed Mode**: Para big data (Ray Cluster)
+### ⚡ **Multimodal processing**
+- **Eager mode**: for small datasets (Polars DataFrame)
+- **Lazy mode**: for medium-sized datasets (Polars LazyFrame)
+- **Distributed mode**: for big data (Ray Cluster)
 
-### 🛡️ **Robustez Empresarial**
-- **Validación completa** de schemas y configuraciones
-- **Manejo automático de errores** y recuperación
-- **Soporte múltiples formatos** (YAML/TOML)
+### 🛡️ **Enterprise robustness**
+- **Full schema and configuration validation**
+- **Automatic error handling and recovery**
+- **Support for multiple formats** (YAML/TOML)
 
+## 🏗️ System Architecture
 
-## 🏗️ Arquitectura del Sistema
+```text 
+  adaptive-data-pipeline/
+  ├── 📁config # Configurations
+  ├── 📁 data # Data
+  ├── 📁 src/
+  │ ├── 📁 core/ # Processing and obtaining results
+  │ ├── 📁 operations/ # Processing operations
+  │ ├── 📁 validation/ # Validation and configuration
+  │ ├── 📁 resources/ # Resource management
+  │ └── 📁 strategies/ # Strategies and patterns
+```
 
-adaptive-data-pipeline/
-├── 📁 core/ # Núcleo del sistema
-│ ├── PipelineDataPreProcessing.py # Orquestador principal
-│ └── Frame.py # Gestor de frames adaptativo
-├── 📁 operations/ # Operaciones de procesamiento
-│ ├── RayOperations.py # Procesamiento distribuido
-│ └── PolarsOperations.py # Operaciones Polars
-├── 📁 validation/ # Validación y configuración
-│ ├── Validator.py # Validación de schemas
-│ └── ReadData.py # Lectura de configuraciones
-├── 📁 resources/ # Gestión de recursos
-│ └── Resources.py # Optimización de recursos Ray
-└── 📁 strategies/ # Estrategias y patrones
-└── Strategy.py # Enums y estrategias
+## 🎯 Intelligent Decision Making
 
-## 🎯 Toma de Decisiones Inteligente
-
-### **Algoritmo de Selección de Modo**
+### **Mode Selection Algorithm**
 
 ```python
 def frame_decision(self, size: int, memory: int) -> str:
     eager_threshold = 0.1 * memory    # 10% of available RAM
     lazy_threshold = 0.75 * memory    # 75% of available RAM
     
-    if tamaño < umbral_eager:
-        return 'eager'    # Polars DataFrame
-    elif tamaño < umbral_lazy:
-        return 'lazy'     # Polars LazyFrame  
+    if size < eager_threshold:
+        return ‘eager’    # Polars DataFrame
+    elif size < lazy_threshold:
+        return ‘lazy’     # Polars LazyFrame  
     else:
         return ‘ray’      # Ray Distributed
 ```
@@ -77,7 +73,7 @@ def ray_init(file_size: float) -> Dict[str, Any]:
     }
 ```
 
-## 🚀 Ejemplos de Uso
+## 🚀 Examples of Use
 
 ### **Basic Configuration (YAML)**
 
@@ -108,14 +104,14 @@ join_data:
 ```python 
     from src.core.PipelineDataPreProcessing import Pipeline
 
-# El sistema elige automáticamente el mejor modo de procesamiento
-pipeline = Pipeline('config.yaml')
-pipeline.operaciones_frame()
+    # The system automatically chooses the best processing mode.
+    pipeline = Pipeline(‘config.yaml’)
+    pipeline.operaciones_frame()
 
-# Según el tamaño de datos y recursos, ejecutará:
-# - Polars Eager (datasets pequeños)
-# - Polars Lazy (datasets medianos) 
-# - Ray Distributed (big data)
+    # Depending on the size of the data and resources, it will execute:
+    # - Polars Eager (small datasets)
+    # - Polars Lazy (medium datasets) 
+    # - Ray Distributed (big data)
 ```
 
 ## 🔧 Supported Operations
@@ -129,7 +125,7 @@ pipeline.operaciones_frame()
 
 ### ⚡ **Execution Modes**
 
-| Modo	          | Caso de Uso	       | Tecnología       |
+| Mode              | Use Case           | Technology       |
 |-----------------|--------------------|------------------|
 | **Eager**          | Datasets < 10% RAM | Polars DataFrame |
 | **Lazy**          | Datasets < 75% RAM | Polars LazyFrame |
@@ -137,9 +133,9 @@ pipeline.operaciones_frame()
 
 ### 🛡️ **Validations**
 
-- Schemas: Verificación de columnas y tipos
-- Recursos: Validación de memoria y CPU disponibles
-- Configuración: Sintaxis YAML/TOML y constraints
+- Schemas: Column and type verification
+- Resources: Available memory and CPU validation
+- Configuration: YAML/TOML syntax and constraints
 
 ## 📦 Installation
 
@@ -154,18 +150,15 @@ pipeline.operaciones_frame()
     tomli==2.4.0
 ```
 
-### **Instalación Completa**
+### **Full Installation**
 
 ```bash
   # Clone the repository
   git clone https://github.com/sm7ss/adaptive-data-pipeline.git
   cd adaptive-data-pipeline
 
-# Instalación en desarrollo
-pip install -e .
-
-# O instalar dependencias directamente
-pip install -r requirements.txt
+  # Or install dependencies directly
+  pip install -r requirements.txt
 ```
 
 ## 🎪 Processing Flow
@@ -173,10 +166,10 @@ pip install -r requirements.txt
 ### **1. Data Analysis**
 
 ```python 
-# El sistema analiza tamaño de datos y recursos
-tamaño = archivo.stat().st_size
-memory = psutil.virtual_memory().available
-decision = self.frame_decision(tamaño, memory)
+  # The system analyzes data size and resources.
+  size = file.stat().st_size
+  memory = psutil.virtual_memory().available
+  decision = self.frame_decision(size, memory)
 ```
 
 ### **2. Technology Selection**
@@ -193,96 +186,96 @@ decision = self.frame_decision(tamaño, memory)
 ### **3. Optimized Processing**
 
 ```python 
-# Aplicación de transformaciones según configuración
-df_transform = frame.with_columns(self.expr.list_expr())
+  # Application of transformations according to configuration
+  df_transform = frame.with_columns(self.expr.list_expr())
 
-# Operaciones complejas (joins, agrupaciones)
-if necesita_join:
-    resultado = self.group_join.join_data(frame1, frame2)
+  # Complex operations (joins, groupings)
+  if join_needed:
+      result = self.group_join.join_data(frame1, frame2)
 ```
 
-### **4. Escritura de Resultados**
+### **4. Writing Results**
 
 ```python
-# Guardado optimizado según el modo
-if es_eager:
-    resultado.write_parquet(output_path)
-else:
-    resultado.sink_parquet(output_path, compression='zstd')
+  # Optimized saving according to mode
+  if eager:
+      result.write_parquet(output_path)
+  else:
+      result.sink_parquet(output_path, compression=‘zstd’)
 ```
 
-## 🔍 Casos de Uso
+## 🔍 Use Cases
 
-### 🏪 **E-commerce analytics**
+### 🏪 **E-commerce Analytics**
 
 ```yaml
   data:
-    input_path: [“users.csv”, “purchases.csv”]
+    input_path: [‘users.csv’, ‘purchases.csv’]
     output_path: 'customer_analytics.parquet'
 
   window_data:
-    operation: “rolling_sum”
-    col: “purchase_amount”
+    operation: ‘rolling_sum’
+    col: ‘purchase_amount’
     window: 30
-    over: “customer_id”
+    over: ‘customer_id’
 
   join_data:
-    join_on: “customer_id”
-    join_type: “left”
+    join_on: ‘customer_id’
+    join_type: ‘left’
 ```
 
-### 🏥 **Healthcare processing**
+### 🏥 **Healthcare Processing**
 
 ```yaml
   data:
-  input_path: “patient_records.csv”
-  output_path: “medical_features.parquet”
+  input_path: ‘patient_records.csv’
+  output_path: ‘medical_features.parquet’
 
   clean_data:
-  operation: “drop_nulls”
-  col: “blood_pressure”
+  operation: ‘drop_nulls’
+  col: ‘blood_pressure’
 
   agg_data:
-  operation: “mean”
-  col: “heart_rate”
-  group_by: “patient_group”
+  operation: ‘mean’
+  col: ‘heart_rate’
+  group_by: 'patient_group'
 ```
 
-### 📱 **Telecommunications analysis**
+### 📱 **Telecomm Analytics**
 
 ```yaml
   data:
-    input_path: [“customers.csv”, “usage_data.csv”]
+    input_path: [‘customers.csv’, ‘usage_data.csv’]
     output_path: 'telecom_features.parquet'
 
   window_data:
-    operation: “rolling_mean”
-    col: “data_usage”
+    operation: ‘rolling_mean’
+    col: ‘data_usage’
     window: 7
-    over: “user_id”
+    over: ‘user_id’
 
   join_data:
-    join_on: “user_id”
-    join_type: “inner”
+    join_on: ‘user_id’
+    join_type: ‘inner’
     post_filter:
-      operations: [“data_usage > 5000”]
+      operations: [‘data_usage > 5000’]
 ```
 
 ## 🤝 Contribution
 
-¡Contribuciones son bienvenidas! Este proyecto utiliza arquitectura modular:
+Contributions are welcome! This project uses modular architecture:
 
-1. Fork el proyecto
-2. Crea una rama (git checkout -b feature/nueva-operacion)
-3. Commit cambios (git commit -m 'Agregar nueva operación de ventana')
-4. Push a la rama (git push origin feature/nueva-operacion)
-5. Abre un Pull Request
+1. Fork the project
+2. Create a branch (git checkout -b feature/new-operation)
+3. Commit changes (git commit -m ‘Add new window operation’)
+4. Push to the branch (git push origin feature/new-operation)
+5. Open a Pull Request
 
 ## 👩‍💻 About the Project
 
-**Adaptive Data Pipeline** representa la culminación de mi journey en data engineering, combinando técnicas avanzadas de procesamiento distribuido con inteligencia artificial aplicada a la gestión de recursos.
+**Adaptive Data Pipeline** represents the culmination of my journey in data engineering, combining advanced distributed processing techniques with artificial intelligence applied to resource management.
 
 The system demonstrates how intelligent automation can optimize complex data pipelines, selecting the optimal technology for each scenario without manual intervention.
 
-**¿Preguntas técnicas?** ¡No dudes en abrir un issue!
+**Technical questions?** Feel free to open an issue!
 
